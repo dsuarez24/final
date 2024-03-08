@@ -1,0 +1,53 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "CompraColletion",
+    "dateExported": "2024-03-09T05:55:51.813Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "cbfdc0ea-c1c4-41a1-93be-bd579dc919b9",
+            "colId": "c855884d-7c7c-4ba7-9e1e-58ef52ddb0f6",
+            "containerId": "",
+            "name": "compraClientePost",
+            "url": "http://localhost:8080/proyectoBim/v1/sale",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-08T08:26:22.527Z",
+            "modified": "2024-03-09T05:41:19.432Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWVhYWI2ZTUzMjU4YmY4ZmZlNzc1OTIiLCJpYXQiOjE3MDk5NjI4NzAsImV4cCI6MTcwOTk2NjQ3MH0.fIUoMnKhITX3ZCxEiOATJ35QYGo3Ic2_VFi0aKs2wfw"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"product\": \"Samsung A5\",\n  \"cantidad\": 1\n}",
+                "form": []
+            },
+            "reqType": "post",
+            "tests": []
+        },
+        {
+            "_id": "d022f21f-cb15-4942-9f91-668f7dce118e",
+            "colId": "c855884d-7c7c-4ba7-9e1e-58ef52ddb0f6",
+            "containerId": "",
+            "name": "Registro Compras",
+            "url": "http://localhost:8080/proyectoBim/v1/sale",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-03-09T04:51:03.745Z",
+            "modified": "2024-03-09T04:51:35.805Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWVhYWI2ZTUzMjU4YmY4ZmZlNzc1OTIiLCJpYXQiOjE3MDk5NTk4ODIsImV4cCI6MTcwOTk2MzQ4Mn0.uDi20aBEGRSJb2OBywvVQvRcL8r9bx9w03dUZc6DBVg"
+                }
+            ],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

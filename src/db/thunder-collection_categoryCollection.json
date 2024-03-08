@@ -1,0 +1,115 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "categoryCollection",
+    "dateExported": "2024-03-09T05:55:33.668Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "f784a9db-2018-4e21-ad28-79eecf72ce2e",
+            "colId": "b18ba4e2-f4bb-42c2-8bfc-559da536b44e",
+            "containerId": "",
+            "name": "categoryPost",
+            "url": "http://localhost:8080/proyectoBim/v1/category",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-08T08:26:22.504Z",
+            "modified": "2024-03-08T08:39:34.182Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU5NDk1NjQ1NDk0ZWNkNTVkNzUwZTkiLCJpYXQiOjE3MDk4ODcxNDUsImV4cCI6MTcwOTg5MDc0NX0.cBHLH4qvfmX0QeaMMXfeBKkk45Np14MbACHV9GsKLUE"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Limpieza\"\n}",
+                "form": []
+            },
+            "reqType": "post",
+            "tests": []
+        },
+        {
+            "_id": "47ddd23c-c4fa-4599-b2ce-ee6743197a3a",
+            "colId": "b18ba4e2-f4bb-42c2-8bfc-559da536b44e",
+            "containerId": "",
+            "name": "categoryGet",
+            "url": "http://localhost:8080/proyectoBim/v1/category/",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-03-08T08:26:22.505Z",
+            "modified": "2024-03-08T08:26:22.505Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU5NDk1NjQ1NDk0ZWNkNTVkNzUwZTkiLCJpYXQiOjE3MDk4NjQ2NjcsImV4cCI6MTcwOTg2ODI2N30.UGm3458rUgAnivOGmqIERD8qqKv4VoIu3mggWGKg7WA"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "14012c43-e923-4604-a780-c3c5c3ccbb9b",
+            "colId": "b18ba4e2-f4bb-42c2-8bfc-559da536b44e",
+            "containerId": "",
+            "name": "categoryPut",
+            "url": "http://localhost:8080/proyectoBim/v1/category/65e7f19f03d7f3ac0e1356b6",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-03-08T08:26:22.506Z",
+            "modified": "2024-03-08T08:26:22.506Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU3ZjE3NTAzZDdmM2FjMGUxMzU2YTgiLCJpYXQiOjE3MDk3MDEzNTMsImV4cCI6MTcwOTcwNDk1M30.VV8vT1zyEOXHPC1XGN_Kw8s8RLEnECBaAj4ZhXifRbs"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Lacteos AA\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "5ea75ff0-a82e-4153-8019-c260394f19d8",
+            "colId": "b18ba4e2-f4bb-42c2-8bfc-559da536b44e",
+            "containerId": "",
+            "name": "categotyDelete",
+            "url": "http://localhost:8080/proyectoBim/v1/category/65e9497545494ecd55d750f4",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-03-08T08:26:22.507Z",
+            "modified": "2024-03-08T08:26:22.507Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU5NDk1NjQ1NDk0ZWNkNTVkNzUwZTkiLCJpYXQiOjE3MDk3ODc0ODYsImV4cCI6MTcwOTc5MTA4Nn0.Rqr3COROalPa8R1p4J2XZ52oEvZvztZoEd4utGUXvig"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "6dfd6762-d59c-4acb-a35d-fc77f847e557",
+            "colId": "b18ba4e2-f4bb-42c2-8bfc-559da536b44e",
+            "containerId": "",
+            "name": "categoryGetById",
+            "url": "http://localhost:8080/proyectoBim/v1/category/65e9496a45494ecd55d750f0",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-03-08T08:26:22.508Z",
+            "modified": "2024-03-08T08:26:22.508Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU5NDk1NjQ1NDk0ZWNkNTVkNzUwZTkiLCJpYXQiOjE3MDk4MDAxODAsImV4cCI6MTcwOTgwMzc4MH0.kKbic6QeGkEDkD6Sl34f7b342XiK0th7D4gR04xAEN0"
+                }
+            ],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
