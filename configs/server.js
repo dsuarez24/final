@@ -4,7 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import { dbConnection } from './mongo.js';
 import userRoutes from '../src/user/user.routes.js';
-
+import categoriaRoutes from '../src/categoria/categoria.routes.js';
 export default class Server {
     constructor() {
         this.app = express();
@@ -31,6 +31,7 @@ export default class Server {
     routes() {
         // Configuración de rutas
         this.app.use('/api/users', userRoutes); // Monta las rutas de usuario en la ruta base /api/users
+        this.app.use('/api/categorias', categoriaRoutes);
     }
 
     listen() {

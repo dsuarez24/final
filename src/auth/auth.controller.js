@@ -1,58 +1,134 @@
-// auth.controller.js
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const User = require('../models/user'); // Asegúrate de importar tu modelo de usuario
+import bcryptjs from 'bcryptjs';
+import Usuario from '../users/user.model.js'
+import { generarJWT } from '../helpers/generate-jwt.js';
 
-// Controlador para el inicio de sesión
-async function login(req, res) {
-  const { email, password } = req.body;
+export const login = async (req, res) => {
+  const { correo, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    //verificar si el email existe:
+    const usuario = await Usuario.findOne({ correo });
 
-    if (!user) {
-      return res.status(400).json({ message: 'Usuario no encontrado' });
+    if (!usuario) {
+      return res.status(400).json({
+        msg: "Credenciales incorrectas, Correo no existe en la base de datos",
+      });
     }
-
-    const validPassword = await bcrypt.compare(password, user.password);
-
+    //verificar si el ususario está activo
+    if (!usuario.estado) {
+      return res.status(400).json({
+        msg: "El usuario no existe en la base de datos",
+      });
+    }
+    // verificar la contraseña
+    const validPassword = bcryptjs.compareSync(password, usuario.password);
     if (!validPassword) {
-      return res.status(400).json({ message: 'Contraseña incorrecta' });
+      return res.status(400).json({
+        msg: "La contraseña es incorrecta",
+      });
     }
+    //generar el JWT
+    const token = await generarJWT(usuario.id);
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.status(200).json({
+      msg: 'Welcomeeeee to the Login!!!',
+      usuario,
+      token
+    });
 
-    res.json({ token });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error de servidor' });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      msg: "Comuniquese con el administrador",
+    });
   }
 }
 
-// Controlador para el registro de nuevos usuarios
-async function register(req, res) {
-  const { email, password } = req.body;
 
+// ----------Clientes
+export const signUp = async (req, res) => {
+
+  const { nombre, correo, password, informacion } = req.body;
+  const usuario = new Usuario({ nombre, correo, password, informacion });
+
+  const salt = bcryptjs.genSaltSync();
+  usuario.password = bcryptjs.hashSync(password, salt);
+
+  await usuario.save();
+
+  res.status(200).json({
+    usuario
+  });
+}
+
+export const usuariosDeleteClientes = async (req, res) => {
   try {
-    const existingUser = await User.findOne({ email });
+    const { id } = req.params;
+    const usuario = req.usuario;
 
-    if (existingUser) {
-      return res.status(400).json({ message: 'El usuario ya existe' });
+    if (usuario.role !== 'CLIENT_ROLE') {
+      return res.status(403).json({ error: 'Acceso denegado. El usuario no tiene permisos para realizar esta función.' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const usuarioEliminar = await Usuario.findById(id);
+    if (!usuarioEliminar) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+    if (usuario.correo !== usuarioEliminar.correo) {
+      return res.status(403).json({ error: 'Acceso denegado. No tiene permisos para eliminar este usuario.' });
+    }
 
-    const newUser = new User({ email, password: hashedPassword });
-    await newUser.save();
+    const usuarioEliminado = await Usuario.findByIdAndUpdate(id, { estado: false });
 
-    res.status(201).json({ message: 'Usuario creado exitosamente' });
+    if (!usuarioEliminado) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    res.status(200).json({ msg: 'Usuario eliminado', usuario: usuarioEliminado });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error de servidor' });
+    console.error('Error al eliminar usuario:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
   }
-}
+};
 
-module.exports = {
-  login,
-  register
+export const usuarioPropioPut = async (req, res = response) => {
+  try {
+    const { id } = req.params;
+    const { _id, password, google, correo, ...resto } = req.body;
+
+    const usuario = req.usuario;
+
+    if (usuario.role !== 'CLIENT_ROLE') {
+      return res.status(403).json({ error: 'Acceso denegado. El usuario no tiene permisos para realizar esta función.' });
+    }
+
+    const usuarioActualizar = await Usuario.findById(id);
+    if (!usuarioActualizar) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+    if (usuario.correo !== usuarioActualizar.correo) {
+      return res.status(403).json({ error: 'Acceso denegado. No tiene permisos para actualizar este usuario.' });
+    }
+
+    if (password) {
+      const salt = bcryptjs.genSaltSync();
+      resto.password = bcryptjs.hashSync(password, salt);
+    }
+
+    await Usuario.findByIdAndUpdate(id, resto);
+
+    const usuarioActualizado = await Usuario.findOne({ _id: id });
+
+    if (!usuarioActualizado) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    res.status(200).json({
+      msg: 'Usuario actualizado',
+      usuario: usuarioActualizado
+    });
+  } catch (error) {
+    console.error('Error al actualizar usuario:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
 };
